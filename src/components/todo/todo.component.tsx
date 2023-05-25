@@ -1,5 +1,5 @@
 import { Colors } from "../../data/constants.data";
-import { reFormatDate } from "../../helpers/utilities.helper";
+import { useTodos } from "../../hooks/useTodos.hook";
 import { Todo as TodoInterface } from "../../interfaces/todos.interfaces";
 
 import "./todo.component.css";
@@ -11,6 +11,7 @@ interface TodoProps {
 
 export default function Todo({ todo, order }: TodoProps) {
   const { name, priority, date, status } = todo;
+  const { handleEditTodo } = useTodos();
 
   return (
     <div className="todo shadow">
@@ -20,7 +21,7 @@ export default function Todo({ todo, order }: TodoProps) {
             <span className="todo__data__order">#{order}</span> {name}
           </p>
           <p className="todo__data__paragraph todo__data__date">
-            {reFormatDate(date)}{" "}
+            {date}{" "}
             <span className="todo__data__status">
               {status ? "(completed)" : "(not completed)"}
             </span>
@@ -40,7 +41,11 @@ export default function Todo({ todo, order }: TodoProps) {
           <span className="material-symbols-outlined">task</span>
         </button>
 
-        <button type="button" className="btn-action btn-action--edit">
+        <button
+          type="button"
+          className="btn-action btn-action--edit"
+          onClick={() => handleEditTodo(todo)}
+        >
           <span className="material-symbols-outlined">edit_note</span>
         </button>
 

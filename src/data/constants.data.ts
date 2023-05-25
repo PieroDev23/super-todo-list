@@ -3,7 +3,7 @@ import { Todo } from "../interfaces/todos.interfaces";
 export const initialState: Todo = {
   id: 0,
   name: "",
-  date: new Date().toLocaleDateString(),
+  date: "",
   status: false,
   priority: "",
 };

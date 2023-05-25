@@ -8,18 +8,15 @@ import { Priority, Todo } from "../../interfaces/todos.interfaces";
 import "./todo-form.component.css";
 
 export default function TodoForm() {
-  const [todo, setTodo] = useState<Todo>(() => initialState);
-  const [validForm, setValidForm] = useState(() => ({
+  const [todo, setTodo] = useState<Todo>(initialState);
+  const [validForm, setValidForm] = useState({
     invalidInput: false,
     disabledBtn: false,
-  }));
+  });
 
-  const { handleSetTodos } = useTodos();
+  const { handleSetTodos, todoEdit } = useTodos();
 
-  const handleChangeName = (name: string) => {
-    setTodo((prevTodo) => ({ ...prevTodo, name }));
-  };
-
+  //Validando el formulario
   useEffect(() => {
     const invalid = todo.name !== "" && todo.name.length <= 10;
     const isDisabled = !todo.priority || !todo.name;
@@ -31,32 +28,43 @@ export default function TodoForm() {
     }));
   }, [todo.name, todo.priority]);
 
+  //Verificando estado del objeto para editarlo
+  useEffect(() => {
+    setTodo((prev) => ({ ...prev, ...todoEdit }));
+  }, [todoEdit]);
+
+  //Actualizando el estado del todo
+  const handleChangeName = (name: string) => {
+    setTodo((prevTodo) => ({ ...prevTodo, name }));
+  };
+
   const handleChangePriority = (priority: Priority) => {
     setTodo((prevTodo) => ({ ...prevTodo, priority }));
   };
 
+  //Enviando datos del formulario
   const handleSubmit = (e: FormEvent<Element>) => {
     e.preventDefault();
 
-    if (Object.values(todo).includes("")) {
+    const newTodo = {
+      ...todo,
+      id: genId(),
+      date: dateFormatter(),
+      status: false,
+    };
+
+    if (Object.values(newTodo).includes("")) {
+      console.log("entra", newTodo);
       return;
     }
 
-    setTodo((prevTodo) => ({
-      ...prevTodo,
-      id: genId(),
-      date: dateFormatter(new Date()),
-      status: false,
-    }));
-
-    handleSetTodos(todo);
+    handleSetTodos(newTodo);
     setTodo(initialState);
   };
 
   return (
     <form className="form shadow" onSubmit={handleSubmit}>
       <h2 className="form__title">📝 Add a new Todo</h2>
-
       <div className="form__field">
         <label htmlFor="todo" className="form__field__label">
           Name:
