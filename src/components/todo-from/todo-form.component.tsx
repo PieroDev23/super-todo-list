@@ -1,44 +1,38 @@
 import { FormEvent, useEffect, useState } from "react";
 
-import {
-  Priority,
-  Todo,
-  TodosContextType,
-} from "../../interfaces/todos.interfaces";
+import { initialState } from "../../data/constants.data";
 import { dateFormatter, genId } from "../../helpers/utilities.helper";
 import { useTodos } from "../../hooks/useTodos.hook";
+import { Priority, Todo } from "../../interfaces/todos.interfaces";
 
 import "./todo-form.component.css";
 
 export default function TodoForm() {
-  const initialState: Todo = {
-    id: 0,
-    name: "",
-    date: new Date().toLocaleDateString(),
-    status: false,
-    priority: "",
-  };
-
   const [todo, setTodo] = useState<Todo>(() => initialState);
   const [validForm, setValidForm] = useState(() => ({
     invalidInput: false,
     disabledBtn: false,
   }));
 
-  const { handleSetTodos }: TodosContextType = useTodos();
+  const { handleSetTodos } = useTodos();
 
   const handleChangeName = (name: string) => {
-    setTodo({ ...todo, name });
+    setTodo((prevTodo) => ({ ...prevTodo, name }));
   };
 
   useEffect(() => {
     const invalid = todo.name !== "" && todo.name.length <= 10;
     const isDisabled = !todo.priority || !todo.name;
-    setValidForm({ invalidInput: invalid, disabledBtn: isDisabled || invalid });
-  }, [todo]);
+
+    setValidForm((prevState) => ({
+      ...prevState,
+      invalidInput: invalid,
+      disabledBtn: isDisabled || invalid,
+    }));
+  }, [todo.name, todo.priority]);
 
   const handleChangePriority = (priority: Priority) => {
-    setTodo({ ...todo, priority });
+    setTodo((prevTodo) => ({ ...prevTodo, priority }));
   };
 
   const handleSubmit = (e: FormEvent<Element>) => {
@@ -48,12 +42,12 @@ export default function TodoForm() {
       return;
     }
 
-    setTodo({
-      ...todo,
+    setTodo((prevTodo) => ({
+      ...prevTodo,
       id: genId(),
       date: dateFormatter(new Date()),
       status: false,
-    });
+    }));
 
     handleSetTodos(todo);
     setTodo(initialState);

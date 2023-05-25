@@ -8,6 +8,7 @@ export interface Todo {
   priority: Priority;
 }
 
+
 export interface TodosContextType {
   todos: Array<Todo>;
   handleSetTodos: (todo: Todo) => void;

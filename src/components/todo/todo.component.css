@@ -1,0 +1,83 @@
+.todo {
+  background-color: var(--white);
+  padding: 1rem;
+  width: 100%;
+  max-height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 1rem;
+}
+
+.todo__header {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: center;
+}
+
+.todo__data {
+  grid-column: 1/3;
+}
+
+.todo__data__prio {
+  grid-column: 3/4;
+  position: relative;
+}
+
+.todo__data__prio__icon {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+.todo__data__title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.todo__data__paragraph {
+  word-break: break-all;
+  margin: 0;
+}
+
+.todo__data__order {
+  font-size: 3rem;
+  line-height: 1;
+}
+
+.todo__data__date {
+  font-size: 1.3rem;
+}
+
+.todo__footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-action {
+  background-color: transparent;
+  border: none;
+}
+
+.btn-action:hover {
+  cursor: pointer;
+}
+
+.btn-action--complete:hover {
+  color: var(--accent);
+  transition-property: color;
+  transition-duration: 300ms;
+}
+
+.btn-action--edit:hover {
+  color: #3b60e4;
+  transition-property: color;
+  transition-duration: 300ms;
+}
+
+.btn-action--delete:hover {
+  color: var(--warn);
+  transition-property: color;
+  transition-duration: 300ms;
+}

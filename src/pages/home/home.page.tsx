@@ -1,5 +1,8 @@
 import List from "../../components/list/list.component";
 
+import { useTodos } from "../../hooks/useTodos.hook";
+
 export default function Home() {
-  return <List />;
+  const { todos } = useTodos();
+  return <List todos={todos} />;
 }
