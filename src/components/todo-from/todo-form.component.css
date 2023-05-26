@@ -15,6 +15,7 @@
   margin: 0 0 2rem 0;
   font-size: 2rem;
   text-transform: uppercase;
+  overflow-wrap: break-word;
 }
 
 .form__field {
