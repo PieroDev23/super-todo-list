@@ -38,11 +38,9 @@ export default function Header() {
             >
               Finished
             </NavLink>
-          </nav>
 
-          <div className="header__bar__score">
             <Score />
-          </div>
+          </nav>
         </div>
       </div>
     </header>

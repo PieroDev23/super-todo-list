@@ -10,7 +10,15 @@ export interface Todo {
 
 export interface TodosContextType {
   todos: Array<Todo>;
-  todoEdit: Todo;
-  handleSetTodos: (todo: Todo) => void;
+  todo: Todo;
+  handleAddTodo: (todo: Todo) => void;
+  handleSetTodo: (todo: Todo) => void;
   handleEditTodo: (todo: Todo) => void;
+  handleRemoveTodo: (todo: Todo) => void;
+  handleChangeFlagTodo: (todo: Todo) => void;
+}
+
+export interface ScoreContextType {
+  score: number;
+  handleIncrementScore: (score: number) => void;
 }

@@ -36,6 +36,10 @@
   text-transform: uppercase;
 }
 
+.todo__data__title--lined {
+  text-decoration: line-through;
+}
+
 .todo__data__paragraph {
   word-break: break-all;
   margin: 0;
@@ -80,4 +84,8 @@
   color: var(--warn);
   transition-property: color;
   transition-duration: 300ms;
+}
+
+.todo__data__status {
+  font-weight: 700;
 }

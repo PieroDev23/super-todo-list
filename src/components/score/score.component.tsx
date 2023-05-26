@@ -1,11 +1,15 @@
-import moon from "../../assets/img/luna.png";
+import { formatScore } from "../../helpers/utilities.helper";
+import { useScore } from "../../hooks/useHooks.hook";
 
 import "./score.component.css";
+import moon from "../../assets/img/luna.png";
 
 export default function Score() {
+  const { score } = useScore();
+
   return (
     <div className="score">
-      <span className="score__number">10000</span>
+      <span className="score__number">{formatScore(score)}</span>
       <img
         className="score__image"
         src={moon}

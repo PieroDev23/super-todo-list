@@ -19,7 +19,7 @@
   .search {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 }
 
@@ -81,6 +81,12 @@
 }
 
 @media (min-width: 768px) {
+  .list__area {
+    height: 48rem;
+  }
+}
+
+@media (min-width: 992px) {
   .list__area {
     height: 36rem;
   }

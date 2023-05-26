@@ -1,25 +1,28 @@
 import { Outlet } from "react-router-dom";
 
-import Header from "../header/header.component";
-import Footer from "../footer/footer.component";
-import TodoForm from "../todo-from/todo-form.component";
 import TodosProvider from "../../context/todo.context";
+import Footer from "../footer/footer.component";
+import Header from "../header/header.component";
+import TodoForm from "../todo-from/todo-form.component";
 
 import "./layout.component.css";
+import ScoreProvider from "../../context/score.context";
 
 export default function Layout() {
   return (
     <>
-      <TodosProvider>
-        <Header />
-        <main className="main container">
-          <TodoForm />
-          <div className="main__list">
-            <Outlet />
-          </div>
-        </main>
-        <Footer />
-      </TodosProvider>
+      <ScoreProvider>
+        <TodosProvider>
+          <Header />
+          <main className="main container">
+            <TodoForm />
+            <div className="main__list">
+              <Outlet />
+            </div>
+          </main>
+          <Footer />
+        </TodosProvider>
+      </ScoreProvider>
     </>
   );
 }
