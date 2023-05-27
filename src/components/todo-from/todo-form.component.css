@@ -66,8 +66,10 @@
 }
 
 .form__button {
+  margin-top: 1rem;
   display: flex;
   justify-content: flex-end;
+  gap: 1.5rem;
 }
 
 .form__button__btn {
@@ -80,7 +82,13 @@
   border: unset;
 }
 
-.form__button__btn:hover {
+.form__button__btn--cancel:hover {
+  cursor: pointer;
+  background-color: var(--warn);
+  transition: background-color 100ms ease-in;
+}
+
+.form__button__btn--go:hover {
   cursor: pointer;
   background-color: var(--accent);
   transition: background-color 100ms ease-in;

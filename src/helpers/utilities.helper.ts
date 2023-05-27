@@ -1,3 +1,5 @@
+import { Todo } from "../interfaces/todos.interfaces";
+
 type ConfigDate = Intl.DateTimeFormatOptions;
 
 export function dateFormatter(): string {
@@ -19,4 +21,17 @@ export function genId(): string {
 
 export function formatScore(score: number) {
   return score.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+export function removeExtraSpaces(value: string): string {
+  return value
+    .trim()
+    .split(" ")
+    .filter((w) => w !== "")
+    .join(" ")
+    .toLowerCase();
+}
+
+export function filterTodosByStatus(todos: Array<Todo>, status: boolean): Array<Todo> {
+  return todos.filter((todo) => todo.status === status);
 }

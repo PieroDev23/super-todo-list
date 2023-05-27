@@ -14,3 +14,13 @@
     width: 65rem;
   }
 }
+
+.page {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 0.5rem;
+}
+
+.page__list {
+  margin-top: 1.5rem;
+}
