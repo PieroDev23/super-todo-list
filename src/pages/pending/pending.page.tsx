@@ -3,8 +3,8 @@ import { useTodos } from "../../hooks/useHooks.hook";
 import List from "../../components/list/list.component";
 
 export default function Pending() {
-  const { todos } = useTodos();
+  const { filteredTodos } = useTodos();
   
-  const pendingTodos = filterTodosByStatus(todos, false);
+  const pendingTodos = filterTodosByStatus(filteredTodos, false);
   return <List todos={pendingTodos} />;
 }

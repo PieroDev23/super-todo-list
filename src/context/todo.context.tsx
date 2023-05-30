@@ -9,14 +9,22 @@ export const TodosContext = createContext<TodosContextType>(
 
 export default function TodosProvider({ children }: PropsWithChildren) {
   const [todos, setTodos] = useState<Array<Todo>>([]);
+  const [query, setQuery] = useState("");
   const [todo, setTodo] = useState<Todo>(initialState);
-
-  
 
   //Agregar todos
   const handleAddTodo = (todo: Todo) => {
     setTodos((prevTodos) => [...prevTodos, todo]);
   };
+
+  //filtrar Todos
+  const handleSetQuery = (query: string) => {
+    setQuery(query);
+  };
+
+  const filteredTodos = todos.filter((todo) =>
+    todo.name.toLowerCase().includes(query)
+  );
 
   //Agregando todo al state
   const handleSetTodo = (todo: Todo) => {
@@ -62,13 +70,15 @@ export default function TodosProvider({ children }: PropsWithChildren) {
   };
 
   const values: TodosContextType = {
-    todos,
+    filteredTodos,
     todo,
+    query,
     handleAddTodo,
     handleSetTodo,
     handleEditTodo,
     handleRemoveTodo,
     handleChangeFlagTodo,
+    handleSetQuery,
   };
 
   return (

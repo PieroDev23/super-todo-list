@@ -9,13 +9,15 @@ export interface Todo {
 }
 
 export interface TodosContextType {
-  todos: Array<Todo>;
+  filteredTodos: Array<Todo>;
   todo: Todo;
+  query: string;
   handleAddTodo: (todo: Todo) => void;
   handleSetTodo: (todo: Todo) => void;
   handleEditTodo: (todo: Todo) => void;
   handleRemoveTodo: (todo: Todo) => void;
   handleChangeFlagTodo: (todo: Todo) => void;
+  handleSetQuery: (query: string) => void;
 }
 
 export interface ScoreContextType {

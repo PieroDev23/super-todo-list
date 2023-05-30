@@ -6,9 +6,9 @@ import { useTodos } from "../../hooks/useHooks.hook";
 import "./search-form.component.css";
 
 export default function SearchForm() {
-  const [search, setSearch] = useState<string>("");
   const [orderBy, setOrderBy] = useState<Priority>("");
-  
+  const { handleSetQuery, query } = useTodos();
+
   return (
     <>
       <h3 className="title">🧠 Todo List</h3>
@@ -17,8 +17,8 @@ export default function SearchForm() {
           <input
             type="text"
             placeholder="Search todo"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
+            value={query}
+            onChange={(e) => handleSetQuery(e.target.value.toLowerCase())}
             maxLength={30}
             className="search__field__input"
           />
