@@ -10,18 +10,15 @@ export const TodosContext = createContext<TodosContextType>(
 export default function TodosProvider({ children }: PropsWithChildren) {
   const [todos, setTodos] = useState<Array<Todo>>([]);
   const [todo, setTodo] = useState<Todo>(initialState);
-  const [todosFiltered, setTodosFiltered] = useState<Array<Todo>>([]);
 
-  //Expose filtered todo
-  const handleSetTodosFiltered = (todosUpdated: Array<Todo>) => {
-    setTodosFiltered(() => [...todosUpdated]);
-  };
+  
 
   //Agregar todos
   const handleAddTodo = (todo: Todo) => {
     setTodos((prevTodos) => [...prevTodos, todo]);
   };
 
+  //Agregando todo al state
   const handleSetTodo = (todo: Todo) => {
     setTodo((prevTodo) => ({ ...prevTodo, ...todo }));
   };
@@ -66,14 +63,12 @@ export default function TodosProvider({ children }: PropsWithChildren) {
 
   const values: TodosContextType = {
     todos,
-    todosFiltered,
     todo,
     handleAddTodo,
     handleSetTodo,
     handleEditTodo,
     handleRemoveTodo,
     handleChangeFlagTodo,
-    handleSetTodosFiltered,
   };
 
   return (

@@ -2,29 +2,13 @@ import { useState } from "react";
 import { Priority } from "../../interfaces/todos.interfaces";
 
 import { useTodos } from "../../hooks/useHooks.hook";
-import { removeExtraSpaces } from "../../helpers/utilities.helper";
 
 import "./search-form.component.css";
 
 export default function SearchForm() {
   const [search, setSearch] = useState<string>("");
   const [orderBy, setOrderBy] = useState<Priority>("");
-
-  const { handleSetTodosFiltered, todos } = useTodos();
-
-  const handleSearchTodos = () => {
-    const results = todos.filter(
-      (todo) =>
-        removeExtraSpaces(todo.name).indexOf(removeExtraSpaces(search)) !== -1
-    );
-
-    if (results.length === 0) {
-      return;
-    }
-
-    handleSetTodosFiltered(results);
-  };
-
+  
   return (
     <>
       <h3 className="title">🧠 Todo List</h3>
@@ -38,11 +22,7 @@ export default function SearchForm() {
             maxLength={30}
             className="search__field__input"
           />
-          <button
-            type="button"
-            className="search__field__button"
-            onClick={handleSearchTodos}
-          >
+          <button type="button" className="search__field__button">
             <span className="material-symbols-outlined">search</span>
           </button>
         </div>
