@@ -8,7 +8,7 @@ export default function ScoreProvider({ children }: PropsWithChildren) {
   const [score, setScore] = useLocalStorage<number>("score", 0);
 
   const handleIncrementScore = (currentScore: number) => {
-    setScore((prevScore: number) => prevScore + currentScore);
+    setScore((prevScore) => prevScore + currentScore);
   };
 
   const values = {

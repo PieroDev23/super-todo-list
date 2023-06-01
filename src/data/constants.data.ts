@@ -5,11 +5,11 @@ export const initialState: Todo = {
   name: "",
   date: "",
   status: false,
-  priority: "",
+  priority: 0,
 };
 
-export const Colors: { [k: string]: string } = {
-  low: "#2BDEAB",
-  medium: "#EFBB6B",
-  high: "#F63528",
+export const Colors: { [k: number]: string } = {
+  10: "#2BDEAB",
+  20: "#EFBB6B",
+  30: "#F63528",
 };

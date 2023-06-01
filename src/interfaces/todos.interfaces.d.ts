@@ -1,11 +1,9 @@
-export type Priority = "low" | "medium" | "high" | "";
-
 export interface Todo {
   id: number | string;
   name: string;
   status: boolean;
   date: string;
-  priority: Priority;
+  priority: number;
 }
 
 export interface TodosContextType {

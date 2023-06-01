@@ -47,7 +47,7 @@ export default function Todo({ todo, order }: TodoProps) {
         <div className="todo__data__prio">
           <span
             className="material-symbols-outlined todo__data__prio__icon"
-            style={{ color: Colors[priority] }}
+            style={{ color: Colors[priority as number] }}
           >
             radio_button_checked
           </span>

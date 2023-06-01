@@ -7,7 +7,7 @@ import {
   removeExtraSpaces,
 } from "../../helpers/utilities.helper";
 import { useTodos } from "../../hooks/useTodos.hook";
-import { Priority, Todo } from "../../interfaces/todos.interfaces";
+import { Todo } from "../../interfaces/todos.interfaces";
 
 import "./todo-form.component.css";
 import { useValidation } from "../../hooks/useValidation.hook";
@@ -62,7 +62,7 @@ export default function TodoForm() {
         <span className="error-validation">
           {validForm.invalidInput
             ? "Invalid input"
-            : validForm.invalidInput
+            : validForm.maxMinLength
             ? "Need at lest 10 characters"
             : ""}
         </span>
@@ -90,12 +90,12 @@ export default function TodoForm() {
               type="radio"
               id="low"
               name="priority"
-              value="low"
-              checked={newTodo.priority === "low"}
+              value={10}
+              checked={newTodo.priority === 10}
               onChange={(e) =>
                 setNewTodo((prevTodo) => ({
                   ...prevTodo,
-                  priority: e.target.value as Priority,
+                  priority: Number(e.target.value),
                 }))
               }
             />
@@ -109,12 +109,12 @@ export default function TodoForm() {
               type="radio"
               id="medium"
               name="priority"
-              value="medium"
-              checked={newTodo.priority === "medium"}
+              value={20}
+              checked={newTodo.priority === 20}
               onChange={(e) =>
                 setNewTodo((prevTodo) => ({
                   ...prevTodo,
-                  priority: e.target.value as Priority,
+                  priority: Number(e.target.value),
                 }))
               }
             />
@@ -128,12 +128,12 @@ export default function TodoForm() {
               type="radio"
               id="high"
               name="priority"
-              value="high"
-              checked={newTodo.priority === "high"}
+              value={30}
+              checked={newTodo.priority === 30}
               onChange={(e) =>
                 setNewTodo((prevTodo) => ({
                   ...prevTodo,
-                  priority: e.target.value as Priority,
+                  priority: Number(e.target.value),
                 }))
               }
             />
