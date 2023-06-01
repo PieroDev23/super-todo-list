@@ -9,7 +9,7 @@ export const TodosContext = createContext<TodosContextType>(
 );
 
 export default function TodosProvider({ children }: PropsWithChildren) {
-  const [todos, setTodos] = useLocalStorage("todos", []);
+  const [todos, setTodos] = useLocalStorage<Array<Todo>>("todos", []);
   const [query, setQuery] = useState("");
   const [todo, setTodo] = useState<Todo>(initialState);
 

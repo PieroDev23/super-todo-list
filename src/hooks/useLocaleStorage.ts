@@ -1,22 +1,20 @@
-import { useEffect, useState } from "react";
-import { Todo } from "../interfaces/todos.interfaces";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
-type LocalStorageData = number | Array<Todo>;
-
-export function useLocalStorage(key: string, defaultValue: LocalStorageData) {
-  
-  const [data, setData] = useState(() => {
+export function useLocalStorage<T>(
+  key: string,
+  defaultValue: T
+): [T, Dispatch<SetStateAction<T>>] {
+  const [data, setData] = useState<T>(() => {
     const dataLS = localStorage.getItem(key);
     if (!dataLS) return defaultValue;
+
     return JSON.parse(dataLS);
   });
 
   useEffect(() => {
     const rawValue = JSON.stringify(data);
     localStorage.setItem(key, rawValue);
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [data]);
+  }, [data, key]);
 
   return [data, setData];
 }
