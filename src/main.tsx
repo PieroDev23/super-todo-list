@@ -7,6 +7,8 @@ import Layout from "./components/layout/layout.component";
 import Home from "./pages/home/home.page";
 import Pending from "./pages/pending/pending.page";
 import Finished from "./pages/finished/finished.page";
+import TodosProvider from "./context/todo.context";
+import ScoreProvider from "./context/score.context";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +33,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <RouterProvider router={router}></RouterProvider>
+    <TodosProvider>
+      <ScoreProvider>
+        <RouterProvider router={router}></RouterProvider>
+      </ScoreProvider>
+    </TodosProvider>
   </React.StrictMode>
 );
