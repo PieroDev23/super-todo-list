@@ -1,13 +1,14 @@
 import { PropsWithChildren, createContext, useState } from "react";
+import { useLocalStorage } from "../hooks/useLocaleStorage";
 import { ScoreContextType } from "../interfaces/todos.interfaces";
 
 export const ScoreContext = createContext({} as ScoreContextType);
 
 export default function ScoreProvider({ children }: PropsWithChildren) {
-  const [score, setScore] = useState(0);
+  const [score, setScore] = useLocalStorage("score", 0)
 
   const handleIncrementScore = (currentScore: number) => {
-    setScore((prevScore) => prevScore + currentScore);
+    setScore((prevScore: number) => prevScore + currentScore);
   };
 
 

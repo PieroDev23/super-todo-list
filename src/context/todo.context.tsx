@@ -9,10 +9,7 @@ export const TodosContext = createContext<TodosContextType>(
 );
 
 export default function TodosProvider({ children }: PropsWithChildren) {
-
-  const [todos, setTodos] = useState<Array<Todo>>(() => JSON.parse(todosLS || "[]"));
-  const todosLS = useLocalStorage(todos, "todos");
-
+  const [todos, setTodos] = useLocalStorage("todos", [])
   const [query, setQuery] = useState("");
   const [todo, setTodo] = useState<Todo>(initialState);
 
@@ -22,7 +19,7 @@ export default function TodosProvider({ children }: PropsWithChildren) {
 
   //Agregar todos
   const handleAddTodo = (todo: Todo) => {
-    setTodos((prevTodos) => [...prevTodos, todo]);
+    setTodos((prevTodos: Array<Todo>) => [...prevTodos, todo]);
   };
 
   //filtrar Todos
@@ -30,7 +27,7 @@ export default function TodosProvider({ children }: PropsWithChildren) {
     setQuery(query);
   };
 
-  const filteredTodos = todos.filter((todo) =>
+  const filteredTodos = todos.filter((todo: Todo) =>
     todo.name.toLowerCase().includes(query)
   );
 
@@ -41,7 +38,7 @@ export default function TodosProvider({ children }: PropsWithChildren) {
 
   //Editar todo
   const handleEditTodo = (todoOnUpdate: Todo) => {
-    const updatedList = todos.map((todo) => {
+    const updatedList = todos.map((todo: Todo) => {
       if (todo.id === todoOnUpdate.id) {
         return {
           ...todoOnUpdate,
@@ -57,13 +54,13 @@ export default function TodosProvider({ children }: PropsWithChildren) {
 
   //Eliminar todo
   const handleRemoveTodo = (todoOnDelete: Todo) => {
-    const updatedList = todos.filter((todo) => todo.id !== todoOnDelete.id);
+    const updatedList = todos.filter((todo: Todo) => todo.id !== todoOnDelete.id);
     setTodos(() => updatedList);
   };
 
   //Completar todo
   const handleChangeFlagTodo = (todoOnUpdate: Todo) => {
-    const updatedList = todos.map((todo) => {
+    const updatedList = todos.map((todo: Todo) => {
       if (todo.id === todoOnUpdate.id) {
         return {
           ...todo,
