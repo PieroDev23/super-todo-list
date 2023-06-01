@@ -1,4 +1,4 @@
-import { PropsWithChildren, createContext, useEffect, useState } from "react";
+import { PropsWithChildren, createContext, useState } from "react";
 import { Todo, TodosContextType } from "../interfaces/todos.interfaces";
 import { initialState } from "../data/constants.data";
 import { useLocalStorage } from "../hooks/useLocaleStorage";
@@ -9,13 +9,9 @@ export const TodosContext = createContext<TodosContextType>(
 );
 
 export default function TodosProvider({ children }: PropsWithChildren) {
-  const [todos, setTodos] = useLocalStorage("todos", [])
+  const [todos, setTodos] = useLocalStorage("todos", []);
   const [query, setQuery] = useState("");
   const [todo, setTodo] = useState<Todo>(initialState);
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
 
   //Agregar todos
   const handleAddTodo = (todo: Todo) => {
@@ -54,7 +50,9 @@ export default function TodosProvider({ children }: PropsWithChildren) {
 
   //Eliminar todo
   const handleRemoveTodo = (todoOnDelete: Todo) => {
-    const updatedList = todos.filter((todo: Todo) => todo.id !== todoOnDelete.id);
+    const updatedList = todos.filter(
+      (todo: Todo) => todo.id !== todoOnDelete.id
+    );
     setTodos(() => updatedList);
   };
 
