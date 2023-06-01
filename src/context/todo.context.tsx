@@ -1,6 +1,7 @@
-import { PropsWithChildren, createContext, useState } from "react";
+import { PropsWithChildren, createContext, useEffect, useState } from "react";
 import { Todo, TodosContextType } from "../interfaces/todos.interfaces";
 import { initialState } from "../data/constants.data";
+import { useLocalStorage } from "../hooks/useLocaleStorage";
 
 //Creando contexto
 export const TodosContext = createContext<TodosContextType>(
@@ -8,9 +9,16 @@ export const TodosContext = createContext<TodosContextType>(
 );
 
 export default function TodosProvider({ children }: PropsWithChildren) {
-  const [todos, setTodos] = useState<Array<Todo>>([]);
+
+  const [todos, setTodos] = useState<Array<Todo>>(() => JSON.parse(todosLS || "[]"));
+  const todosLS = useLocalStorage(todos, "todos");
+
   const [query, setQuery] = useState("");
   const [todo, setTodo] = useState<Todo>(initialState);
+
+  useEffect(() => {
+    localStorage.setItem("todos", JSON.stringify(todos));
+  }, [todos]);
 
   //Agregar todos
   const handleAddTodo = (todo: Todo) => {

@@ -6,42 +6,16 @@ import {
   genId,
   removeExtraSpaces,
 } from "../../helpers/utilities.helper";
-import { useTodos } from "../../hooks/useHooks.hook";
+import { useTodos } from "../../hooks/useTodos.hook";
 import { Priority, Todo } from "../../interfaces/todos.interfaces";
 
 import "./todo-form.component.css";
+import { useValidation } from "../../hooks/useValidation.hook";
 
 export default function TodoForm() {
   const [newTodo, setNewTodo] = useState<Todo>(initialState);
-
-  const [validForm, setValidForm] = useState({
-    maxMinLength: false,
-    disabledBtn: false,
-    invalidInput: false,
-  });
-
-  //Desempaquetando el contexto
   const { handleAddTodo, handleEditTodo, todo } = useTodos();
-
-  //Validando el formulario
-  useEffect(() => {
-    const maxMinLength =
-      newTodo.name !== "" &&
-      newTodo.name.length <= 10 &&
-      newTodo.name.trim().length !== 0;
-
-    const invalidInput =
-      newTodo.name !== "" && newTodo.name.trim().length === 0;
-
-    const required = !newTodo.priority || !newTodo.name;
-
-    setValidForm((prevState) => ({
-      ...prevState,
-      maxMinLength,
-      disabledBtn: required || maxMinLength,
-      invalidInput,
-    }));
-  }, [newTodo.name, newTodo.priority]);
+  const validForm = useValidation(newTodo);
 
   //Verificando estado del objeto para editarlo
   useEffect(() => {
@@ -65,6 +39,7 @@ export default function TodoForm() {
       setNewTodo(initialState);
       return;
     }
+
     handleEditTodo(newTodo);
     setNewTodo(initialState);
   };
@@ -84,16 +59,13 @@ export default function TodoForm() {
         <label htmlFor="todo" className="form__field__label">
           Name:
         </label>
-        {validForm.invalidInput ? (
-          <span className="error-validation">Invalid input</span>
-        ) : (
-          ""
-        )}
-        {validForm.maxMinLength ? (
-          <span className="error-validation">Need at least 10 characters</span>
-        ) : (
-          ""
-        )}
+        <span className="error-validation">
+          {validForm.invalidInput
+            ? "Invalid input"
+            : validForm.invalidInput
+            ? "Need at lest 10 characters"
+            : ""}
+        </span>
         <input
           type="text"
           className="form__field__input"

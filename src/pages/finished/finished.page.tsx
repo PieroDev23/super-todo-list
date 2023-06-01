@@ -1,6 +1,6 @@
 import List from "../../components/list/list.component";
 import { filterTodosByStatus } from "../../helpers/utilities.helper";
-import { useTodos } from "../../hooks/useHooks.hook";
+import { useTodos } from "../../hooks/useTodos.hook";
 
 export default function Finished() {
   const { filteredTodos } = useTodos();

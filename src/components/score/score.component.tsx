@@ -1,5 +1,5 @@
 import { formatScore } from "../../helpers/utilities.helper";
-import { useScore } from "../../hooks/useHooks.hook";
+import { useScore } from "../../hooks/useScore.hook";
 
 import "./score.component.css";
 import moon from "../../assets/img/luna.png";

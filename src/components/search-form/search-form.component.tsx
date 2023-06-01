@@ -1,7 +1,7 @@
 import { useState } from "react";
-import { Priority } from "../../interfaces/todos.interfaces";
 
-import { useTodos } from "../../hooks/useHooks.hook";
+import { Priority } from "../../interfaces/todos.interfaces";
+import { useTodos } from "../../hooks/useTodos.hook";
 
 import "./search-form.component.css";
 
@@ -22,8 +22,12 @@ export default function SearchForm() {
             maxLength={30}
             className="search__field__input"
           />
-          <button type="button" className="search__field__button">
-            <span className="material-symbols-outlined">search</span>
+          <button
+            type="button"
+            className="search__field__button"
+            onClick={() => handleSetQuery("")}
+          >
+            Clear
           </button>
         </div>
 

@@ -1,5 +1,6 @@
 import { Colors } from "../../data/constants.data";
-import { useScore, useTodos } from "../../hooks/useHooks.hook";
+import { useTodos } from "../../hooks/useTodos.hook";
+import { useScore } from "../../hooks/useScore.hook";
 import { Todo as TodoInterface } from "../../interfaces/todos.interfaces";
 
 import "./todo.component.css";
