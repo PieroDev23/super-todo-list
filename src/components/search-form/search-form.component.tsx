@@ -1,12 +1,7 @@
-import { useState } from "react";
-
-import { Priority } from "../../interfaces/todos.interfaces";
 import { useTodos } from "../../hooks/useTodos.hook";
-
 import "./search-form.component.css";
 
 export default function SearchForm() {
-  const [orderBy, setOrderBy] = useState<Priority>("");
   const { handleSetQuery, query } = useTodos();
 
   return (
@@ -29,19 +24,6 @@ export default function SearchForm() {
           >
             Clear
           </button>
-        </div>
-
-        <div className="search__order-by">
-          <select
-            value={orderBy}
-            onChange={(e) => setOrderBy(e.target.value as Priority)}
-            className="search__order-by__select"
-          >
-            <option value="">Order by Priority 🚥</option>
-            <option value="low">🟢 Low Priority </option>
-            <option value="medium">🟡 Medium Priority</option>
-            <option value="high"> 🔴 High Priority</option>
-          </select>
         </div>
       </form>
     </>

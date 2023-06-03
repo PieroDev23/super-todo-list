@@ -4,6 +4,7 @@ export function useLocalStorage<T>(
   key: string,
   defaultValue: T
 ): [T, Dispatch<SetStateAction<T>>] {
+  
   const [data, setData] = useState<T>(() => {
     const dataLS = localStorage.getItem(key);
     if (!dataLS) return defaultValue;
